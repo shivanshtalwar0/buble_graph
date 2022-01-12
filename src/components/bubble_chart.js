@@ -29,8 +29,7 @@ export function BubbleChart(props = {offset: {left: 20, right: 20, bottom: 20, t
     useEffect(() => {
         setCanvas(ref.current)
         setContext(ref.current.getContext('2d'))
-        console.log('inner')
-        let xMax, xMin, yMax, yMin, zMax, zMin, xScaled, yScaled;
+        let xMax, xMin, yMax, yMin, zMax, zMin;
         const xValues = props.data.map((e) => e.x);
         const yValues = props.data.map((e) => e.y);
         const zValues = props.data.map((e) => e.z);
@@ -42,20 +41,13 @@ export function BubbleChart(props = {offset: {left: 20, right: 20, bottom: 20, t
         zMin = Math.min.apply(Math, zValues)
         const xscaled = niceScale(Math.min(xMin, 0), Math.max(props.width, xMax), 20)
         const yscaled = niceScale(Math.min(yMin, 0), Math.max(props.height, yMax), 20)
-        console.log(xscaled)
-        console.log(yscaled)
         setXScaled(xscaled)
         setYScaled(yscaled);
-        console.log(xValues)
-        console.log(xScaled)
-        console.log(yValues)
-        console.log(yScaled)
         if (context) {
             context.clearRect(0, 0, canvas.width, canvas.height)
             createAxes()
             createAxes(false)
             props.data.forEach((el) => {
-                // const el = props.data[key];
                 const zScaled = ((el.z - zMin) / (zMax - zMin)) * (40 - 20) + 20
                 plotPoint(el.x, el.y, el.title || '', zScaled)
             })

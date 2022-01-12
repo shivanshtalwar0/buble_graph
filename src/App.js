@@ -1,6 +1,6 @@
 import './App.css';
 import {BubbleChart} from "./components/bubble_chart";
-import {useEffect, useLayoutEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
     const [data, setItems] = useState([])
@@ -19,8 +19,8 @@ function App() {
     return (
         <div className="App">
             <BubbleChart
-                width="600"
-                height="600"
+                width="900"
+                height="900"
                 offset={{left: 20, bottom: 20, right: 20, top: 20}}
                 data={data}
             />
